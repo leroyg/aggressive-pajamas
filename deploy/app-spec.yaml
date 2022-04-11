@@ -1,0 +1,63 @@
+
+databases:
+- engine: PG
+  name: aggressive-pajamas-db
+  num_nodes: 1
+  size: db-s-dev-database
+  version: "12"
+- cluster_name: aggressive-pajamas-redis
+  engine: REDIS
+  name: aggressive-pajamas-redis
+  production: true
+  version: "6"
+name: aggressive-pajamas
+region: nyc
+services:
+- dockerfile_path: Dockerfile.web
+  envs:
+  - key: DATABASE_URL
+    scope: RUN_TIME
+    value: ${aggressive-pajamas-db.DATABASE_URL}
+  - key: DJANGO_SETTINGS_MODULE
+    scope: RUN_AND_BUILD_TIME
+    value: aggressive-pajamas.settings_do
+  - key: SECRET_KEY
+    scope: RUN_AND_BUILD_TIME
+    value: 'mtbMbzijoMztInOeEPqAAqawKsTqPfbplPkwpvQv'
+  - key: REDIS_URL
+    scope: RUN_TIME
+    value: ${aggressive-pajamas-redis.DATABASE_URL}
+  github:
+    branch: main
+    deploy_on_push: true
+    repo: user/aggressive-pajamas
+  http_port: 8080
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  name: aggressive-pajamas-web
+  routes:
+  - path: /
+  run_command: gunicorn --bind 0.0.0.0:8080 --workers 1 --threads 8 --timeout 0 --worker-tmp-dir /dev/shm aggressive-pajamas.wsgi:application
+workers:
+- dockerfile_path: Dockerfile.web
+  envs:
+  - key: DATABASE_URL
+    scope: RUN_TIME
+    value: ${aggressive-pajamas-db.DATABASE_URL}
+  - key: DJANGO_SETTINGS_MODULE
+    scope: RUN_AND_BUILD_TIME
+    value: aggressive-pajamas.settings_do
+  - key: SECRET_KEY
+    scope: RUN_AND_BUILD_TIME
+    value: 'mtbMbzijoMztInOeEPqAAqawKsTqPfbplPkwpvQv'
+  - key: REDIS_URL
+    scope: RUN_TIME
+    value: ${aggressive-pajamas-redis.DATABASE_URL}
+  github:
+    branch: main
+    deploy_on_push: true
+    repo: user/aggressive-pajamas
+  instance_count: 1
+  instance_size_slug: basic-xs
+  name: aggressive-pajamas-celery
+  run_command: celery -A aggressive-pajamas worker -l INFO --pool=gevent

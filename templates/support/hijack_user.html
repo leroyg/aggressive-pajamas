@@ -1,0 +1,17 @@
+{% extends "web/app/app_base.html" %}
+{% load hijack %}
+{% load form_tags %}
+{% block app %}
+  <section class="app-card">
+    <h3 class="title">Impersonate a User</h3>
+    <p class="lead">
+      Use the form below to temporarily login to the site as someone else. Use this feature responsibly!
+    </p>
+    <form action="{% url 'hijack:acquire' %}" method="POST">
+      {% csrf_token %}
+      {% render_select_input form.user_pk %}
+      <input class="btn btn-primary" type="submit" value="Login as User">
+      <input type="hidden" name="next" value="{{ redirect_url }}">
+    </form>
+  </section>
+{% endblock %}

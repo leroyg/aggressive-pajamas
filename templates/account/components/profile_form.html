@@ -1,0 +1,24 @@
+{% load form_tags %}
+<div class="row">
+  <div id="profile-picture" class="col-md-3">
+    <div>
+      <img class="avatar" src="{{ user.avatar_url }}">
+      <div id='profile-upload-holder' class="text-center">
+        <label for="profile-upload" id="profile-upload-label" class="btn btn-link">
+          Change Picture
+        </label>
+        <input id="profile-upload" type="file" accept="image/*"/>
+      </div>
+    </div>
+  </div>
+  <div class="col-md">
+    <h3 class="pg-subtitle">My Details</h3>
+    <form method="post">
+      {% csrf_token %}
+      {% render_text_input form.email %}
+      {% render_text_input form.first_name %}
+      {% render_text_input form.last_name %}
+      <input class="btn btn-primary" type="submit" value="Save">
+    </form>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+{% extends "web/base.html" %}
+{% load static %}
+{% block body %}
+<section class="container my-5">
+    <div class="row align-items-center">
+        <div class="col-md-4">
+            <img class="img-fluid" src="{% static 'images/undraw/undraw_alert.svg' %}" alt="Uh-Oh">
+        </div>
+        <div class="col-md">
+            <h3>Shucks. We couldn't find that.</h3>
+            <p class="lead">
+                If you think this page should exist, double-check that you are signed in as the
+                right person.
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock%}

@@ -1,0 +1,22 @@
+default_context:
+  _pegasus_version: '2022.3'
+  author_name: Leroy
+  ci: github_actions
+  css_framework: bootstrap
+  css_theme: bootstrap-material
+  database: postgres
+  deploy_platform: digital_ocean_app_platform
+  description: Host better Brazilian Jiu-Jitsu Competitions
+  domain_name: localhost:8000
+  email: leroy.gardner@gmail.com
+  enable_google_login: n
+  front_end_framework: htmx
+  project_name: Aggressive Pajamas
+  project_slug: aggressive-pajamas
+  stripe_payment_mode: both
+  subscription_billing_model: default
+  use_api_keys: y
+  use_docker: n
+  use_impersonation: y
+  use_subscriptions: n
+  use_teams: n

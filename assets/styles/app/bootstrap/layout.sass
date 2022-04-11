@@ -1,0 +1,19 @@
+
+// make icons behave like they do in bulma
+.icon
+  display: inline-flex
+  align-items: center
+  justify-content: center
+  height: 1.5rem
+  width: 1.5rem
+
+
+.app-card
+  @extend .shadow-sm
+  margin-bottom: 1em
+  padding: 2em
+  width: 100%
+  border-radius: .3em
+  // allow using "notification" class to override color styles
+  &:not(.notification)
+    background-color: white

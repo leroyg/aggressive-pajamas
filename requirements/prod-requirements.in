@@ -1,0 +1,4 @@
+gunicorn
+dj-database-url
+whitenoise
+gevent

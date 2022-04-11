@@ -1,0 +1,13 @@
+FROM python:3.9-buster
+ENV PYTHONUNBUFFERED=1
+
+RUN mkdir /code
+WORKDIR /code
+
+COPY requirements requirements/
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+COPY . /code/
+
+# note: if you don't want to run collectstatic on every deploy you can remove this line.
+RUN python manage.py collectstatic --noinput --settings=aggressive-pajamas.settings_do

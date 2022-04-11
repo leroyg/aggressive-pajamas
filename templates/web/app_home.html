@@ -1,0 +1,26 @@
+{% extends "web/app/app_base.html" %}
+{% load static %}
+{% block app %}
+  <section class="app-card py-5">
+    <div class="row align-items-center">
+      <div class="col-md order-md-last">
+        <img class="img-fluid" src="{% static 'images/undraw/undraw_outer_space.svg' %}" alt="Fly Away!">
+      </div>
+      <div class="col-md">
+        <h3>You're Signed In!</h3>
+        <p class="lead">
+          This is your application's logged in home page.
+        </p>
+        <p>
+          Now go make something great!
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="app-card">
+    <div>
+      <p>To add more to this page you can make new sections like this one.</p>
+      <p>Tip: the source of this page can be found at <code>templates/web/app_home.html</code></p>
+    </div>
+  </section>
+{% endblock %}
